@@ -1,29 +1,37 @@
-# Create T3 App
+# Biobank app repo
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+This is a repository for the [biobank-app](https://github.com/biobank-sh/biobank-app) project.
 
-## What's next? How do I make an app with this?
+## Todo
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+[ ] Add a README.md file
+[x] Deploy to vercel
+[x] set up github repo
+[] create layout
+[] create pages
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## Core featurses
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+[] creating a project
+[] viewing projects
+[] creating a project
+[] viewing a project
+[] editing a project
+[] deleting a project
+[] creating a sample
+[] viewing samples
+[] creating a sample
+[] viewing a sample
+[] editing a sample
+[] deleting a sample
 
-## Learn More
+## Advanced features
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
-
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
-
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
-
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+[] Authentication
+[] User management
+[]sorting projects and samples
+[] filtering projects and samples
+[] pagination
+[] search
+[] dashboard
+[] dark mode
