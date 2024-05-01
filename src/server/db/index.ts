@@ -9,5 +9,5 @@ import {
   uniqueIndex,
 } from "drizzle-orm/pg-core";
 
-// Use this object to send drizzle queries to your DB
-export const db = drizzle(sql, { schema, logger: true });
+// Use this object to send drizzle queries to your DBlogger: true
+export const db = drizzle(sql, { schema });

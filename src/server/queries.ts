@@ -6,16 +6,16 @@ import { and, eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 // import analyticsServerClient from "./analytics";
 
-export async function getProjectss() {
+export async function getProjects() {
   // const user = auth();
 
   // if (!user.userId) throw new Error("Unauthorized");
 
-  const images = await db.query.projects.findMany({
+  const projects = await db.query.projects.findMany({
     // where: (model, { eq }) => eq(model.userId, user.userId),
     orderBy: (model, { desc }) => desc(model.id),
   });
-
+  console.log(projects);
   return projects;
 }
 

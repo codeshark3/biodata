@@ -4,7 +4,7 @@ This is a repository for the [biobank-app](https://github.com/biobank-sh/biobank
 
 ## Todo
 
-- [ ] Add a README.md file
+- [ x] Add a README.md file
 - [x] Deploy to vercel
 - [x] set up github repo
 - [x] create layout
@@ -13,7 +13,7 @@ This is a repository for the [biobank-app](https://github.com/biobank-sh/biobank
 ## Core featurses
 
 - [] creating a project
-- [] viewing projects
+- [x] viewing projects
 - [] creating a project
 - [] viewing a project
 - [] editing a project
@@ -31,7 +31,7 @@ This is a repository for the [biobank-app](https://github.com/biobank-sh/biobank
 - [] User management
 - []sorting projects and samples
 - [] filtering projects and samples
-- [] pagination
-- [] search
-- [] dashboard
+- [x] pagination
+- [x] search
+- [x] dashboard
 - [] dark mode

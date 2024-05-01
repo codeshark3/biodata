@@ -10,6 +10,6 @@ export default {
     connectionString: env.POSTGRES_URL,
   },
   tablesFilter: ["biodata_*"],
-  verbose: true,
-  strict: true,
+  // verbose: true,
+  // strict: true,
 } satisfies Config;
