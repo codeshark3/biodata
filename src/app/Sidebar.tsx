@@ -21,7 +21,7 @@ import Link from "next/link";
 
 export default function Sidebar() {
   const currentPath = usePathname();
-  console.log(currentPath);
+
   const menuList = [
     {
       group: "General",
