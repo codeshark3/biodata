@@ -1,4 +1,5 @@
 "use client";
+import { useState, useTransition } from "react";
 import * as z from "zod";
 import { LoginSchema } from "~/schemas";
 import { useForm } from "react-hook-form";
@@ -16,9 +17,11 @@ import {
 import { Button } from "~/components/ui/button";
 import { FormError } from "~/components/FormError";
 import { FormSuccess } from "~/components/FormSuccess";
-import { login } from "~/server/login";
-import { useTransition } from "react";
+import { login } from "~/server/auth";
+
 export const LoginForm = () => {
+  const [error, setError] = useState<string | undefined>("");
+  const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
 
   const form = useForm<z.infer<typeof LoginSchema>>({
@@ -30,8 +33,13 @@ export const LoginForm = () => {
   });
 
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
+    setError("");
+    setSuccess("");
     startTransition(() => {
-      login(values);
+      login(values).then((data) => {
+        setError(data.error);
+        setSuccess(data.success);
+      });
     });
   };
   return (
@@ -76,8 +84,8 @@ export const LoginForm = () => {
               )}
             />
           </div>
-          <FormError message="Invalid email or password" />
-          <FormSuccess message=" Email sent" />
+          <FormError message={error} />
+          <FormSuccess message={success} />
           <Button type="submit" className=" w-full" disabled={isPending}>
             Login
           </Button>
