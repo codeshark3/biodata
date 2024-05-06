@@ -1,7 +1,7 @@
 "use client";
 import { BellIcon } from "lucide-react";
-import { Button } from "../components/ui/button";
-import { CommandDemo } from "../components/Command";
+import { Button } from "~/components/ui/button";
+import { CommandDemo } from "~/components/Command";
 import {
   DropdownMenu,
   DropdownMenuContent,

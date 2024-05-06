@@ -33,7 +33,7 @@ export async function getProject(id: number) {
   return project;
 }
 
-export async function deleteImage(id: number) {
+export async function deleteProject(id: number) {
   // const user = auth();
   // if (!user.userId) throw new Error("Unauthorized");
 

@@ -8,14 +8,14 @@ import {
   Container,
   Settings,
 } from "lucide-react";
-import UserItem from "../components/UserItem";
+import UserItem from "~/components/UserItem";
 import {
   Command,
   CommandGroup,
   CommandItem,
   CommandList,
   CommandSeparator,
-} from "../components/ui/command";
+} from "~/components/ui/command";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
@@ -26,12 +26,16 @@ export default function Sidebar() {
     {
       group: "General",
       items: [
-        { link: "/", icon: <Home />, text: "Dashboard" },
-        { link: "/projects", icon: <Target />, text: "Projects" },
-        { link: "/samples", icon: <TestTubeDiagonal />, text: "Samples" },
+        { link: "/dashboard", icon: <Home />, text: "Dashboard" },
+        { link: "/dashboard/projects", icon: <Target />, text: "Projects" },
+        {
+          link: "/dashboard/samples",
+          icon: <TestTubeDiagonal />,
+          text: "Samples",
+        },
 
-        { link: "/inventory", icon: <Container />, text: "Inventory" },
-        { link: "/analytics", icon: <BarChart />, text: "Analytics" },
+        { link: "/dashboard/users", icon: <User />, text: "Users" },
+        { link: "/dashboard/settings", icon: <Settings />, text: "Settings" },
       ],
     },
     {

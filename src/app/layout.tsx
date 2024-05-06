@@ -22,14 +22,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body
-        className={`font-sans ${inter.variable} flex items-start justify-between`}
-      >
-        <Sidebar />
+      <body className={`font-sans ${inter.variable} `}>
+        {/* <Sidebar />
         <main className="grid h-full w-full  pl-[300px]">
-          <Navbar />
-          {children}
-        </main>
+          <Navbar /> */}
+        {children}
+        {/* </main> */}
       </body>
     </html>
   );

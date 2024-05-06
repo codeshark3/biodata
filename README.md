@@ -4,7 +4,7 @@ This is a repository for the [biobank-app](https://github.com/biobank-sh/biobank
 
 ## Todo
 
-- [ x] Add a README.md file
+- [x] Add a README.md file
 - [x] Deploy to vercel
 - [x] set up github repo
 - [x] create layout
