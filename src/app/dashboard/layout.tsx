@@ -6,9 +6,12 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     //   <div className="flex h-full items-center justify-center">{children}</div>
     <div>
       <Sidebar />
-      <main className="grid h-full w-full  pl-[300px]">
+      <main className="grid  h-full w-full   pl-[300px]">
         <Navbar />
-        {children}
+
+        <div className="flex h-full w-full items-center justify-center  p-4">
+          {children}
+        </div>
       </main>
     </div>
   );

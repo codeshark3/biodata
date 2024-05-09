@@ -1,4 +1,3 @@
-import React from "react";
 import { Button } from "~/components/ui/button";
 import Link from "next/link";
 import { DataTable } from "./data-table";
@@ -9,7 +8,7 @@ async function Projects() {
   const projects = await getProjects();
 
   return (
-    <div className="w-full">
+    <div className=" h-full w-full  rounded-lg  p-4 ">
       <DataTable columns={columns} data={projects} />
     </div>
   );
@@ -17,17 +16,16 @@ async function Projects() {
 
 export default async function ProjectsPage() {
   return (
-    <div className="flex flex-col gap-4 p-4">
+    <div className="h-full w-full   ">
       <div>
-        <Button className="btn-primary h-10 w-40">
-          <Link href="/projects/new">Create Project</Link>
-        </Button>
-      </div>
-
-      <div className=" container  flex flex-col items-center rounded-md   bg-white shadow-md">
-        <div className="p-4">
-          <h2 className="text-lg font-medium">Projects</h2>
-          <p className="mt-1 text-sm text-gray-500">All Projects</p>
+        <div className="flex items-center justify-between px-4">
+          <div className="items-center  ">
+            <h2 className="text-2xl font-bold">Projects</h2>
+            <p className="mt-1 text-sm text-gray-500">All Projects</p>
+          </div>
+          <Button className="btn-primary h-10 w-40">
+            <Link href="/dashboard/projects/new">Create Project</Link>
+          </Button>
         </div>
         <Projects />
       </div>

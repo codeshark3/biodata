@@ -7,4 +7,7 @@ import { db } from "~/server/db/index";
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [Google],
   adapter: DrizzleAdapter(db),
+  session: {
+    strategy: "jwt",
+  },
 });

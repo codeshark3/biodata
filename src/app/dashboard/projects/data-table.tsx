@@ -30,7 +30,7 @@ import {
 } from "~/components/ui/dropdown-menu";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
-
+import Link from "next/link";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
@@ -63,15 +63,20 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="flex w-full flex-col items-center justify-between">
-      <div className="flex  justify-evenly py-4">
+      <div className="flex w-full justify-between  py-2">
         <Input
-          placeholder="Filter emails..."
+          placeholder="Filter projects..."
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("name")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
+        {/* <div>
+          <Button className="btn-primary h-10 w-40">
+            <Link href="/dashboard/projects/new">Create Project</Link>
+          </Button>
+        </div> */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
@@ -100,14 +105,14 @@ export function DataTable<TData, TValue>({
         </DropdownMenu>
       </div>
 
-      <div className="rounded-md border">
+      <div className="w-full rounded-md border ">
         <Table>
-          <TableHeader>
+          <TableHeader className="bg-primary">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead key={header.id} className="text-white">
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -150,7 +155,7 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
+      <div className="flex w-full items-center justify-between space-x-2  p-4">
         <Button
           variant="outline"
           size="sm"
