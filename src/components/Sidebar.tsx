@@ -16,8 +16,9 @@ import {
   CommandList,
   CommandSeparator,
 } from "~/components/ui/command";
-import { usePathname } from "next/navigation";
+import { usePathname, redirect, useRouter } from "next/navigation";
 import Link from "next/link";
+import { Button } from "./ui/button";
 
 export default function Sidebar() {
   const currentPath = usePathname();
@@ -26,16 +27,23 @@ export default function Sidebar() {
     {
       group: "General",
       items: [
-        { link: "/dashboard", icon: <Home />, text: "Dashboard" },
-        { link: "/dashboard/projects", icon: <Target />, text: "Projects" },
+        { link: "/", icon: <Home />, text: "Dashboard" },
+        { link: "/projects", icon: <Target />, text: "Projects" },
         {
-          link: "/dashboard/samples",
+          link: "/samples",
           icon: <TestTubeDiagonal />,
           text: "Samples",
         },
 
-        { link: "/dashboard/users", icon: <User />, text: "Users" },
-        { link: "/dashboard/settings", icon: <Settings />, text: "Settings" },
+        { link: "/users", icon: <User />, text: "Users" },
+        { link: "/settings", icon: <Settings />, text: "Settings" },
+      ],
+    },
+    {
+      group: "Admin",
+      items: [
+        // { link: "/settings", icon: <Settings />, text: "Settings" },
+        { link: "/admin/users", icon: <User />, text: "Profile" },
       ],
     },
     {
@@ -57,7 +65,7 @@ export default function Sidebar() {
             {menuList.map((menu: any, key: number) => (
               <CommandGroup key={key} heading={menu.group}>
                 {menu.items.map((option: any, optionKey: number) => (
-                  <Link href={option.link}>
+                  <Link href={option.link} key={optionKey}>
                     <CommandItem
                       key={optionKey}
                       className={` ${option.link === currentPath ? "text-zinc-900" : "text-zinc-500"}  flex cursor-pointer gap-2 p-2 hover:bg-sky-900 `}
@@ -72,7 +80,7 @@ export default function Sidebar() {
           </CommandList>
         </Command>
       </div>
-      <div>settings</div>
+      <div></div>
     </div>
   );
 }

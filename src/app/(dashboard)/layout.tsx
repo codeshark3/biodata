@@ -1,9 +1,10 @@
 import "~/styles/globals.css";
 
 import { Inter } from "next/font/google";
-import Navbar from "./Navbar";
-import Sidebar from "./Sidebar";
-
+import Navbar from "../Navbar";
+import Sidebar from "../../components/Sidebar";
+import { Suspense } from "react";
+import Loading from "./loading";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -23,11 +24,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`font-sans ${inter.variable} `}>
-        {/* <Sidebar />
+        <Sidebar />
         <main className="grid h-full w-full  pl-[300px]">
-          <Navbar /> */}
-        {children}
-        {/* </main> */}
+          <Navbar />
+          <div className="flex h-full w-full items-center justify-center  p-4">
+            <Suspense fallback={<Loading />}>{children}</Suspense>
+          </div>
+        </main>
       </body>
     </html>
   );

@@ -1,4 +1,5 @@
-import "server-only";
+// import "server-only";
+"use server";
 import { db } from "./db";
 // import { auth } from "@clerk/nextjs/server";
 import { projects } from "./db/schema";
@@ -15,7 +16,7 @@ export async function getProjects() {
     // where: (model, { eq }) => eq(model.userId, user.userId),
     orderBy: (model, { desc }) => desc(model.id),
   });
-  console.log(projects);
+
   return projects;
 }
 
@@ -36,11 +37,9 @@ export async function getProject(id: number) {
 export async function deleteProject(id: number) {
   // const user = auth();
   // if (!user.userId) throw new Error("Unauthorized");
-
   // await db
   //   .delete(projects)
   //   .where(and(eq(projects.id, id), eq(projects.userId, user.userId)));
-
   // analyticsServerClient.capture({
   //   distinctId: user.userId,
   //   event: "delete project",
@@ -48,6 +47,5 @@ export async function deleteProject(id: number) {
   //     imageId: id,
   //   },
   // });
-
-  redirect("/");
+  // redirect("/");
 }

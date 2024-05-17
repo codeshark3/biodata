@@ -18,12 +18,13 @@ import { Button } from "~/components/ui/button";
 import { FormError } from "~/components/FormError";
 import { FormSuccess } from "~/components/FormSuccess";
 import { login } from "~/server/auth";
+import { useRouter } from "next/navigation";
 
 export const LoginForm = () => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
-
+  const router = useRouter();
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -39,6 +40,9 @@ export const LoginForm = () => {
       login(values).then((data) => {
         setError(data.error);
         setSuccess(data.success);
+        if (data.success) {
+          router.push("/");
+        }
       });
     });
   };

@@ -18,11 +18,13 @@ import { Button } from "~/components/ui/button";
 import { FormError } from "~/components/FormError";
 import { FormSuccess } from "~/components/FormSuccess";
 import { register } from "~/server/auth";
+import { useRouter } from "next/navigation";
 
 export const RegisterForm = () => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
@@ -30,16 +32,20 @@ export const RegisterForm = () => {
       name: "",
       email: "",
       password: "",
+      confirm_password: "",
     },
   });
 
   const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
     setError("");
     setSuccess("");
+
     startTransition(() => {
       register(values).then((data) => {
         setError(data.error);
         setSuccess(data.success);
+
+        router.push("/users");
       });
     });
   };
@@ -89,6 +95,24 @@ export const RegisterForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Password</FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    disabled={isPending}
+                    placeholder="*******"
+                    type="password"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="confirm_password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Confirm Password</FormLabel>
                 <FormControl>
                   <Input
                     {...field}
