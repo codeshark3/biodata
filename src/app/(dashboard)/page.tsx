@@ -28,7 +28,7 @@ export default async function HomePage() {
         </div>
 
         <h1>{user.name}</h1>
-        <h2>{session.id}</h2>
+        <h2>{session?.id}</h2>
         <LogoutButton />
       </div>
     </div>

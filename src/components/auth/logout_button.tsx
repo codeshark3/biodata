@@ -1,5 +1,3 @@
-import React from "react";
-
 import { logout } from "~/server/auth";
 import { Button } from "~/components/ui/button";
 
