@@ -11,7 +11,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 import LogoutButton from "~/components/auth/logout_button";
-export default function Sidebar({ user }: { user: any }) {
+export default function Sidebar() {
   const currentPath = usePathname();
   interface MenuItem {
     link: string;
@@ -31,7 +31,13 @@ export default function Sidebar({ user }: { user: any }) {
         { link: "/", icon: <Home />, text: "Dashboard" },
         { link: "/projects", icon: <Target />, text: "Projects" },
         { link: "/samples", icon: <TestTubeDiagonal />, text: "Samples" },
+        { link: "/users", icon: <User />, text: "Users" },
+        { link: "/settings", icon: <Settings />, text: "Settings" },
       ],
+    },
+    {
+      group: "Admin",
+      items: [{ link: "/users", icon: <User />, text: "User Management" }],
     },
     {
       group: "Settings",

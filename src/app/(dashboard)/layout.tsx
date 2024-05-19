@@ -5,6 +5,7 @@ import Navbar from "../Navbar";
 import Sidebar from "../../components/Sidebar";
 import { Suspense } from "react";
 import Loading from "./loading";
+import { validateRequest } from "~/auth";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -16,15 +17,16 @@ export const metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const { user } = await validateRequest();
   return (
     <html lang="en">
       <body className={`font-sans ${inter.variable} `}>
-        <Sidebar />
+        <Sidebar user={user} />
         <main className="grid h-full w-full  pl-[300px]">
           <Navbar />
           <div className="flex h-full w-full items-center justify-center  p-4">
