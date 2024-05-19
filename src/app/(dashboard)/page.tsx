@@ -2,13 +2,17 @@ import { Button } from "~/components/ui/button";
 import { validateRequest } from "~/auth";
 import { redirect } from "next/navigation";
 import LogoutButton from "~/components/auth/logout_button";
+import { Paths } from "~/lib/constants";
 import Link from "next/link";
 export default async function HomePage() {
   const { user, session } = await validateRequest();
 
+  // if (!user) {
+  //   console.log("no user:", user);
+  //   return redirect("/auth/login");
+  // }
   if (!user) {
-    console.log("no user:", user);
-    return redirect("/auth/login");
+    return redirect(Paths.Login);
   }
 
   return (

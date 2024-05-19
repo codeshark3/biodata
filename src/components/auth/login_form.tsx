@@ -1,6 +1,6 @@
 "use client";
 import { useState, useTransition } from "react";
-import * as z from "zod";
+import type * as z from "zod";
 import { LoginSchema } from "~/schemas";
 import { useForm } from "react-hook-form";
 import { CardWrapper } from "./card-wrapper";
@@ -37,13 +37,25 @@ export const LoginForm = () => {
     setError("");
     setSuccess("");
     startTransition(() => {
-      login(values).then((data) => {
-        setError(data.error);
-        setSuccess(data.success);
-        if (data.success) {
-          router.push("/");
-        }
-      });
+      login(values)
+        .then((data) => {
+          setError(data.error);
+          setSuccess(data.success);
+          if (data.success) {
+            router.push("/");
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+          setError("An error occurred during login.");
+        });
+      //  login(values).then((data) => {
+      //   setError(data.error);
+      //   setSuccess(data.success);
+      //   if (data.success) {
+      //     router.push("/");
+      //   }
+      // });
     });
   };
   return (

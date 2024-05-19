@@ -9,8 +9,7 @@
     "db:studio": "drizzle-kit studio",
     "dev": "next dev ",
     "lint": "next lint",
-    "start": "next start",
-    "postinstall": "pnpm rebuild argon2"
+    "start": "next start"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.0.1",
@@ -63,5 +62,5 @@
   "ct3aMetadata": {
     "initVersion": "7.32.0"
   },
-  "packageManager": "pnpm@9.0.4"
+  "packageManager": "pnpm@9.0.6"
 }

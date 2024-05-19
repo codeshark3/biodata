@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 import { LoginSchema, RegisterSchema } from "~/schemas/index";
 
 import { db } from "~/server/db";
-import { and, eq } from "drizzle-orm";
+
 import { userTable } from "~/server/db/schema";
 
 import { getUserByEmail, getUserByEmailAndPassword } from "~/server/data/user";
@@ -112,10 +112,12 @@ export async function logout() {
     sessionCookie.attributes,
   );
 
-  return redirect("/auth/login");
+  //return redirect("/auth/login");
   // } catch (error: any) {
   //   return { error: error?.message };
   // }
+
+  return { success: "Logout Successful" };
 }
 
 // Check user session
