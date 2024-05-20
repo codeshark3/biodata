@@ -31,8 +31,10 @@ export const createTable = pgTableCreator((name) => `biodata_${name}`);
 export const roleEnums = pgEnum("role", ["user", "admin"]);
 
 export const userTable = createTable("user", {
-  id: text("id").primaryKey(),
-
+  // id: text("id").primaryKey(),
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
   name: text("name"),
   email: text("email").notNull().unique(),
   password: text("password").notNull(),

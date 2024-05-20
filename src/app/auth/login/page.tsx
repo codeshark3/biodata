@@ -6,7 +6,6 @@ const LoginPage = async () => {
   const { user } = await validateRequest();
 
   if (user) {
-    console.log("user login", user);
     return redirect("/");
   }
 

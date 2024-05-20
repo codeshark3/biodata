@@ -10,11 +10,12 @@ import { db } from "~/server/db";
 import { userTable } from "~/server/db/schema";
 
 import { getUserByEmail, getUserByEmailAndPassword } from "~/server/data/user";
-import * as argon2 from "argon2";
+// import * as argon2 from "argon2";
 import { lucia } from "~/auth";
 import { cookies } from "next/headers";
 import { generateId } from "lucia";
 import { validateRequest } from "~/auth";
+import bcrypt from "bcrypt";
 
 export async function login(values: z.infer<typeof LoginSchema>) {
   const validatedFields = LoginSchema.safeParse(values);
@@ -40,13 +41,13 @@ export async function login(values: z.infer<typeof LoginSchema>) {
     // console.log("password", validatedFields.data.password);
     return { error: "Invalid Password !" };
   }
-  const isValidPassword = await argon2.verify(
-    existingUser.password,
-    validatedFields.data.password,
-  );
-  if (!isValidPassword) {
-    return { error: "Incorrect Email or Password! " };
-  }
+  // const isValidPassword = await argon2.verify(
+  //   existingUser.password,
+  //   validatedFields.data.password,
+  // );
+  // if (!isValidPassword) {
+  //   return { error: "Incorrect Email or Password! " };
+  // }
   const userId = existingUser.id;
   const session = await lucia.createSession(userId, {
     expiresIn: 60 * 60 * 24 * 30,
@@ -69,7 +70,7 @@ export async function register(values: z.infer<typeof RegisterSchema>) {
       error: "Invalid Fields!",
     };
   }
-  const { email, password, confirm_password, name } = validatedFields.data;
+  const { email, password, name } = validatedFields.data;
   const existingUser = await getUserByEmail(email);
 
   if (existingUser) {
@@ -78,12 +79,12 @@ export async function register(values: z.infer<typeof RegisterSchema>) {
   // if (password !== confirm_password) {
   //   return { error: "Passwords do not match" };
   // }
-  // const hashedPassword = await bcrypt.hash(password, 10);
-  const hashedPassword = await argon2.hash(values.password);
-  const userId = generateId(15);
+  const hashedPassword = await bcrypt.hash(password, 10);
+  // const hashedPassword = await argon2.hash(values.password);
+  // const userId = generateId(15);
   try {
     await db.insert(userTable).values({
-      id: userId,
+      // id: userId,
       email,
       password: hashedPassword,
       name,
