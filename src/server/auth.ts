@@ -30,15 +30,12 @@ export async function login(values: z.infer<typeof LoginSchema>) {
     validatedFields.data.password,
   );
   // const existingUser = await getUserByEmail(validatedFields.data.email);
-  // console.log("existingUser", existingUser);
 
   if (!existingUser) {
     return { error: "User does not exist!" };
   }
 
   if (!existingUser.password) {
-    // console.log("password", existingUser.password);
-    // console.log("password", validatedFields.data.password);
     return { error: "Invalid Password !" };
   }
   // const isValidPassword = await argon2.verify(
@@ -104,14 +101,14 @@ export async function logout() {
     return { error: "Unauthorized!" };
   }
 
-  await lucia.invalidateSession(session.id);
+  // await lucia.invalidateSession(session.id);
 
-  const sessionCookie = lucia.createBlankSessionCookie();
-  cookies().set(
-    sessionCookie.name,
-    sessionCookie.value,
-    sessionCookie.attributes,
-  );
+  // const sessionCookie = lucia.createBlankSessionCookie();
+  // cookies().set(
+  //   sessionCookie.name,
+  //   sessionCookie.value,
+  //   sessionCookie.attributes,
+  // );
 
   //return redirect("/auth/login");
   // } catch (error: any) {

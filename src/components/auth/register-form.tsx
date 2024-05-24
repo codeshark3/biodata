@@ -41,12 +41,18 @@ export const RegisterForm = () => {
     setSuccess("");
 
     startTransition(() => {
-      register(values).then((data) => {
-        setError(data.error);
-        setSuccess(data.success);
-
-        router.push("/users");
-      });
+      register(values)
+        .then((data) => {
+          setError(data.error);
+          setSuccess(data.success);
+          if (data.success) {
+            router.push("/users");
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+          setError("An error occurred during login.");
+        });
     });
   };
   return (

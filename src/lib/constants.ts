@@ -12,10 +12,16 @@ export enum Paths {
   Project = "/projects/:id",
 
   Samples = "/samples",
-  //   Sample = "/samples/:id",
+  Sample = "/samples/:id",
 
-  //   Profile = "/profile",
-  //   Settings = "/settings",
-  //   VerifyEmail = "/verify-email",
-  //   ResetPassword = "/reset-password",
+  Profile = "/profile",
+  Settings = "/settings",
+  VerifyEmail = "/verify-email",
+  ResetPassword = "/reset-password",
 }
+//   Sample = "/samples/:id",
+
+//   Profile = "/profile",
+//   Settings = "/settings",
+//   VerifyEmail = "/verify-email",
+//   ResetPassword = "/reset-password",

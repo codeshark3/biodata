@@ -43,8 +43,8 @@ export default async function ProjectsPage() {
             <Link href="/projects/new">Create Project</Link>
           </Button>
         </div>
-        {/* 
-        <Projects /> */}
+
+        <Projects />
 
         <LogoutButton />
       </div>

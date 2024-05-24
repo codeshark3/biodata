@@ -4,7 +4,7 @@ import { db } from "./db";
 // import { auth } from "@clerk/nextjs/server";
 import { projects } from "./db/schema";
 import { and, eq } from "drizzle-orm";
-import { redirect } from "next/navigation";
+// import { redirect } from "next/navigation";
 // import analyticsServerClient from "./analytics";
 
 export async function getProjects() {
