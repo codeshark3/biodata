@@ -15,54 +15,54 @@ import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import Link from "next/link";
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type Projects = {
+export type Samples = {
   id: number;
-  project_id: string;
-  name: string;
-  start_date: string;
-  end_date: string;
-  description: string;
+  sample_id: string;
+  gender: string;
+  sample_type: string;
+  source: string;
+  location: string;
   createdAt: string;
 };
-export const columns: ColumnDef<Projects>[] = [
+export const columns: ColumnDef<Samples>[] = [
+  // {
+  //   accessorKey: "sample_id",
+  //   header: ({ column }) => {
+  //     return (
+  //       <Button
+  //         className="text-center"
+  //         variant="ghost"
+  //         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+  //       >
+  //       Sample ID
+  //         <ArrowUpDown className="ml-2 h-4 w-4" />
+  //       </Button>
+  //     );
+  //   },
+  //   cell: ({ row }) => {
+  //     return (
+  //       <div className="text-center font-medium">{row.getValue("name")}</div>
+  //     );
+  //   },
+  // },
   {
-    accessorKey: "name",
-    header: ({ column }) => {
-      return (
-        <Button
-          className="text-center"
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Name
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-    cell: ({ row }) => {
-      return (
-        <div className="text-center font-medium">{row.getValue("name")}</div>
-      );
-    },
-  },
-  {
-    accessorKey: "project_id",
-    header: "Project Id",
+    accessorKey: "sample_id",
+    header: "Sample Id",
     cell: ({ row }) => {
       return (
         <div className="text-center font-medium">
-          {row.getValue("project_id")}
+          {row.getValue("sample_id")}
         </div>
       );
     },
   },
   {
-    accessorKey: "start_date",
+    accessorKey: "gender",
     // header: "Start date",
 
-    header: () => <div className="text-center">Start Date</div>,
+    header: () => <div className="text-center">Gender</div>,
     cell: ({ row }) => {
-      const date = new Date(row.getValue("start_date"));
+      const date = new Date(row.getValue("gender"));
       const formatted = date.toLocaleDateString("en-US", {
         year: "numeric",
         month: "long",
@@ -73,23 +73,32 @@ export const columns: ColumnDef<Projects>[] = [
     },
   },
   {
-    accessorKey: "end_date",
-    header: "End Date",
+    accessorKey: "sample_type",
+    header: "Sample Type",
     cell: ({ row }) => {
       return (
         <div className="text-center font-medium">
-          {row.getValue("end_date")}
+          {row.getValue("sample_type")}
         </div>
       );
     },
   },
   {
-    accessorKey: "description",
-    header: "Description",
+    accessorKey: "source",
+    header: "Source",
+    cell: ({ row }) => {
+      return (
+        <div className="text-center font-medium">{row.getValue("source")}</div>
+      );
+    },
+  },
+  {
+    accessorKey: "location",
+    header: "Location",
     cell: ({ row }) => {
       return (
         <div className="text-center font-medium">
-          {row.getValue("description")}
+          {row.getValue("location")}
         </div>
       );
     },
@@ -98,15 +107,15 @@ export const columns: ColumnDef<Projects>[] = [
     header: "Actions",
     id: "actions",
     cell: ({ row }) => {
-      const project = row.original;
+      const sample = row.original;
 
       return (
         <div className="flex items-center justify-center ">
           <Button className="h-10 w-20 bg-sky-600 ">
             <Edit size={16} color="white" />
             <Link
-              href={`/projects/${project.id} `}
-              onClick={() => console.log(project.id)}
+              href={`/samples/${sample.id} `}
+              onClick={() => console.log(sample.id)}
             >
               Details
             </Link>

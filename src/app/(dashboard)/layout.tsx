@@ -6,6 +6,7 @@ import Sidebar from "../../components/Sidebar";
 import { Suspense } from "react";
 import Loading from "./loading";
 import { validateRequest } from "~/auth";
+import { Toaster } from "~/components/ui/toaster";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -30,7 +31,10 @@ export default async function RootLayout({
         <main className="grid h-full w-full  pl-[300px]">
           <Navbar />
           <div className="flex h-full w-full items-center justify-center  p-4">
-            <Suspense fallback={<Loading />}>{children}</Suspense>
+            <Suspense fallback={<Loading />}>
+              {children}
+              <Toaster />
+            </Suspense>
           </div>
         </main>
       </body>
