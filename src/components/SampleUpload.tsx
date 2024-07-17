@@ -18,8 +18,10 @@ import { useState, useTransition } from "react";
 import Link from "next/link";
 import { Input } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
-
+import { ZodError } from "zod";
+import { SampleSchema } from "~/schemas";
 import { toast } from "~/components/ui/use-toast";
+
 type FormData = {
   file: FileList | null;
 };
@@ -28,7 +30,7 @@ const SampleUpload = () => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
-  const [jsonData, setJsonData] = useState<any[]>([]);
+  const [jsonSampleData, setJsonSampleData] = useState<any[]>([]);
   const router = useRouter();
 
   //   const { toast } = useToast();
@@ -51,60 +53,82 @@ const SampleUpload = () => {
       const worksheetName = workbook.SheetNames[0];
       const worksheet = workbook.Sheets[worksheetName];
       const jsonData = XLSX.utils.sheet_to_json(worksheet);
-      setJsonData(jsonData);
-      // console.log("JSON Data:", jsonData);
 
-      setError("");
-      setSuccess("");
-      startTransition(() => {
-        addSamples(jsonData)
-          .then((data) => {
-            setError(data.error);
-            setSuccess(data.success);
-            if (data.success) {
-              toast({
-                // title: { success },
-                description: "Samples uploaded successfully",
-                variant: "success",
-                className: "bg-emerald-500 text-white font-bold ",
-              });
+      const validateJsonData = (jsonData: any[]) => {
+        // Loop through each object in jsonData
+        for (const data of jsonData) {
+          try {
+            // Validate the object against sampleSchema
+            SampleSchema.parse(data);
+          } catch (error) {
+            // If validation fails, check if it's a ZodError
+            if (error instanceof ZodError) {
+              console.error("Validation Errors:", error.errors);
             } else {
-              toast({
-                // title: { error },
-                description: "An error occurred while uploading the samples",
-                variant: "destructive",
-              });
+              console.error("Validation Error:", error);
             }
-            // if (data.success) {
-            //   window.location.reload();
-            //   // router.replace(router.asPath).then(() => {
+            // Return false if validation fails
+            return false;
+          }
+        }
+        // If all objects pass validation, return true
+        return true;
+      };
 
-            //   // });
-            //   router.push("/auth/login");
-            // }
-          })
-          .catch((err) => {
-            console.error(err);
-            setError("An error occurred during logout.");
-          });
-      });
+      const isJsonDataValid = validateJsonData(jsonData);
 
-      // Now send the JSON data to the server
-      // const response = await fetch("/api/upload", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({ data: jsonData }),
-      // });
+      if (isJsonDataValid) {
+        setJsonSampleData(jsonData);
+        setError("");
+        setSuccess("");
+        startTransition(() => {
+          addSamples(jsonSampleData)
+            .then((data) => {
+              setError(data.error);
+              setSuccess(data.success);
+              if (data.success) {
+                toast({
+                  // title: { success },
+                  description: "Samples uploaded successfully",
+                  variant: "default",
+                  className: "bg-emerald-500 text-white font-bold ",
+                });
+              } else {
+                toast({
+                  // title: { error },
+                  description: "An error occurred while uploading the samples",
+                  variant: "destructive",
+                });
+              }
+              // if (data.success) {
+              //   window.location.reload();
+              //   // router.replace(router.asPath).then(() => {
 
-      // const result = await response.json();
-
-      // if (result.error) {
-      //   setError(result.error);
-      // } else {
-      //   setSuccess(result.success);
-      // }
+              //   // });
+              //   router.push("/auth/login");
+              // }
+            })
+            .catch((err) => {
+              console.error(err);
+              setError("An error occurred during logout.");
+            });
+        });
+        // toast({
+        //   title: "Samples uploaded successfully",
+        //   description: "Samples uploaded successfully",
+        //   variant: "default",
+        //   className: "bg-emerald-500 text-white font-bold ",
+        // });
+        console.log("jsonData matches sampleSchema");
+      } else {
+        // console.log("jsonData does not match sampleSchema");
+        toast({
+          title: "Error Submitting Samples",
+          description: "Check if excel file is valid",
+          variant: "destructive",
+          className: " text-white font-bold ",
+        });
+      }
     } catch (error) {
       console.error(error);
 
@@ -123,44 +147,43 @@ const SampleUpload = () => {
 
   return (
     <>
-      <div className="flex w-full items-center justify-center space-y-4 border-4  border-emerald-800">
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="flex w-full flex-col items-center justify-center space-y-6 border-2 border-red-800"
-          >
-            <div className="flex w-2/3 space-x-2 border-2 border-blue-800">
-              <FormField
-                control={form.control}
-                name="file"
-                render={({ field }) => (
-                  <FormItem>
-                    {/* <FormLabel>File</FormLabel> */}
-                    <FormControl>
-                      <Input
-                        {...field}
-                        type="file"
-                        onChange={(e) => field.onChange(e.target.files)}
-                        disabled={isPending}
-                        value={undefined}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button type="submit" className="w-1/3" disabled={isPending}>
-                Upload
-              </Button>
-            </div>
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className=" flex h-full  justify-end  "
+        >
+          <div className=" flex  items-center justify-center space-x-2">
+            <FormField
+              control={form.control}
+              name="file"
+              render={({ field }) => (
+                <FormItem>
+                  {/* <FormLabel>File</FormLabel> */}
+                  <FormControl>
+                    <Input
+                      {...field}
+                      type="file"
+                      onChange={(e) => field.onChange(e.target.files)}
+                      disabled={isPending}
+                      value={undefined}
+                      className="w-[500px]"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button type="submit" className="h-10 w-40" disabled={isPending}>
+              Upload
+            </Button>
+          </div>
 
-            {/* <FormError message={error} />
+          {/* <FormError message={error} />
             <FormSuccess message={success} /> */}
-          </form>
-        </Form>
+        </form>
+      </Form>
 
-        {/* <div className="flex flex-col space-y-4 border-4 "></div> */}
-      </div>
+      {/* <div className="flex flex-col space-y-4 border-4 "></div> */}
     </>
   );
 };

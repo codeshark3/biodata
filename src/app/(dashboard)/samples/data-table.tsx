@@ -65,10 +65,12 @@ export function DataTable<TData, TValue>({
     <div className="flex w-full flex-col items-center justify-between">
       <div className="flex w-full justify-between  py-2">
         <Input
-          placeholder="Filter projects..."
-          value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
+          placeholder="Filter samples by id..."
+          value={
+            (table.getColumn("sample_id")?.getFilterValue() as string) ?? ""
+          }
           onChange={(event) =>
-            table.getColumn("name")?.setFilterValue(event.target.value)
+            table.getColumn("sample_id")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />

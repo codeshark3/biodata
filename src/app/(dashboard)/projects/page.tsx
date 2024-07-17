@@ -46,7 +46,7 @@ export default async function ProjectsPage() {
 
         <Projects />
 
-        <LogoutButton />
+        {/* <LogoutButton /> */}
       </div>
     </div>
   );

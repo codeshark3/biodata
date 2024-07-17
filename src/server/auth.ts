@@ -94,26 +94,25 @@ export async function register(values: z.infer<typeof RegisterSchema>) {
 }
 
 export async function logout() {
-  // try {
-  console.warn("auth logout");
-  const { session } = await validateRequest();
-  if (!session) {
-    return { error: "Unauthorized!" };
+  try {
+    const { session } = await validateRequest();
+    if (!session) {
+      return { error: "Unauthorized!" };
+    }
+
+    await lucia.invalidateSession(session.id);
+
+    const sessionCookie = lucia.createBlankSessionCookie();
+    cookies().set(
+      sessionCookie.name,
+      sessionCookie.value,
+      sessionCookie.attributes,
+    );
+
+    return redirect("/auth/login");
+  } catch (error: any) {
+    return { error: error?.message };
   }
-
-  // await lucia.invalidateSession(session.id);
-
-  // const sessionCookie = lucia.createBlankSessionCookie();
-  // cookies().set(
-  //   sessionCookie.name,
-  //   sessionCookie.value,
-  //   sessionCookie.attributes,
-  // );
-
-  //return redirect("/auth/login");
-  // } catch (error: any) {
-  //   return { error: error?.message };
-  // }
 
   return { success: "Logout Successful" };
 }

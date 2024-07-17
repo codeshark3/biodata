@@ -1,8 +1,7 @@
-import Link from "next/link";
-import { Button } from "~/components/ui/button";
+import NewProjectForm from "~/components/pages/NewProjectForm";
 
 const NewProjectPage = () => {
-  return <div>NewProjectPage</div>;
+  return <NewProjectForm />;
 };
 
 export default NewProjectPage;

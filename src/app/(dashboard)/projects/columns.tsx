@@ -17,8 +17,8 @@ import Link from "next/link";
 // You can use a Zod schema here if you want.
 export type Projects = {
   id: number;
-  project_id: string;
-  name: string;
+  title: string;
+  principal_investigator: string;
   start_date: string;
   end_date: string;
   description: string;
@@ -26,7 +26,7 @@ export type Projects = {
 };
 export const columns: ColumnDef<Projects>[] = [
   {
-    accessorKey: "name",
+    accessorKey: "title",
     header: ({ column }) => {
       return (
         <Button
@@ -34,26 +34,42 @@ export const columns: ColumnDef<Projects>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Name
+          Title
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
     cell: ({ row }) => {
       return (
-        <div className="text-center font-medium">{row.getValue("name")}</div>
+        <div className="text-center font-medium">{row.getValue("title")}</div>
       );
     },
   },
   {
-    accessorKey: "project_id",
-    header: "Project Id",
+    accessorKey: "principal_investigator",
+    header: "P.I",
     cell: ({ row }) => {
       return (
         <div className="text-center font-medium">
-          {row.getValue("project_id")}
+          {row.getValue("principal_investigator")}
         </div>
       );
+    },
+  },
+  {
+    accessorKey: "date_of_registration",
+    // header: "Start date",
+
+    header: () => <div className="text-center">Registration Date</div>,
+    cell: ({ row }) => {
+      const date = new Date(row.getValue("date_of_registration"));
+      const formatted = date.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+
+      return <div className="text-center font-medium ">{formatted}</div>;
     },
   },
   {
@@ -72,28 +88,28 @@ export const columns: ColumnDef<Projects>[] = [
       return <div className="text-center font-medium ">{formatted}</div>;
     },
   },
-  {
-    accessorKey: "end_date",
-    header: "End Date",
-    cell: ({ row }) => {
-      return (
-        <div className="text-center font-medium">
-          {row.getValue("end_date")}
-        </div>
-      );
-    },
-  },
-  {
-    accessorKey: "description",
-    header: "Description",
-    cell: ({ row }) => {
-      return (
-        <div className="text-center font-medium">
-          {row.getValue("description")}
-        </div>
-      );
-    },
-  },
+  // {
+  //   accessorKey: "end_date",
+  //   header: "End Date",
+  //   cell: ({ row }) => {
+  //     return (
+  //       <div className="text-center font-medium">
+  //         {row.getValue("end_date")}
+  //       </div>
+  //     );
+  //   },
+  // },
+  // {
+  //   accessorKey: "description",
+  //   header: "Description",
+  //   cell: ({ row }) => {
+  //     return (
+  //       <div className="text-center font-medium">
+  //         {row.getValue("description")}
+  //       </div>
+  //     );
+  //   },
+  // },
   {
     header: "Actions",
     id: "actions",
@@ -102,8 +118,8 @@ export const columns: ColumnDef<Projects>[] = [
 
       return (
         <div className="flex items-center justify-center ">
-          <Button className="h-10 w-20 bg-sky-600 ">
-            <Edit size={16} color="white" />
+          <Button className=" w-25 h-10 items-center justify-center bg-sky-600  ">
+            <Edit size={16} />
             <Link
               href={`/projects/${project.id} `}
               onClick={() => console.log(project.id)}

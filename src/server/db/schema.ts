@@ -9,6 +9,9 @@ import {
   serial,
   timestamp,
   varchar,
+  date,
+  boolean,
+  numeric,
   pgTable,
   text,
   primaryKey,
@@ -65,25 +68,60 @@ export type NewUser = typeof userTable.$inferInsert;
 //   image: text("image"),
 // });
 
+///////////////// Project Table //////////////////
 export const projects = createTable(
   "project",
   {
     id: serial("id").primaryKey(),
-    project_id: varchar("project_id", { length: 256 }),
-    name: varchar("name", { length: 256 }),
-    start_date: timestamp("start_date"),
-    end_date: timestamp("end_date"),
-    description: varchar("description", { length: 256 }),
+    title: varchar("title", { length: 255 }),
+    principal_investigator: varchar("principal_investigator", {
+      length: 255,
+    }),
+    date_of_registration: date("date_of_registration"),
+    institution: varchar("institution", { length: 255 }),
+    department: varchar("department", { length: 255 }),
+    contact_no: varchar("contact_no", { length: 13 }),
+    email: varchar("email", { length: 255 }),
+    name_irb: varchar("name_irb", { length: 255 }),
+    irb_approval_no: varchar("irb_approval_no", { length: 255 }),
+    approval_date: date("approval_date"),
+    storage_requirements: varchar("storage_requirements", { length: 255 }),
+    expiry_date: date("expiry_date"),
+    consent_forms: boolean("consent_forms"),
+    consent_for_storage: boolean("consent_for_storage"),
+    urine: boolean("urine"),
+    stool: boolean("stool"),
+    whole_blood: boolean("whole_blood"),
+    serum: boolean("serum"),
+    plasma: boolean("plasma"),
+    skin_snip: boolean("skin_snip"),
+    dna: boolean("dna"),
+    rna: boolean("rna"),
+
+    others: varchar("others", { length: 255 }),
+    no_urine: integer("no_urine"),
+    no_whole_blood: integer("no_whole_blood"),
+    no_serum: integer("no_serum"),
+    no_plasma: integer("no_plasma"),
+    no_skin_snip: integer("no_skin_snip"),
+    no_dna: integer("no_dna"),
+    no_rna: integer("no_rna"),
+    no_others: integer("no_others"),
+    start_date: date("start_date"),
+    end_date: date("end_date"),
+    number_of_samples: integer("number_of_samples"),
+    user_id: varchar("user_id", { length: 255 }),
     createdAt: timestamp("created_at")
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
     updatedAt: timestamp("updatedAt"),
   },
-  (value) => ({
-    nameIndex: index("project_name_idx").on(value.name),
-  }),
+  // (value) => ({
+  //   nameIndex: index("project_name_idx").on(value.),
+  // }),
 );
 
+/////////////////////// Sample Table ///////////////
 export const samples = createTable("sample", {
   id: serial("id").primaryKey(),
   sample_id: varchar("sample_id", { length: 20 }),

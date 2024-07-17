@@ -62,14 +62,9 @@ export const columns: ColumnDef<Samples>[] = [
 
     header: () => <div className="text-center">Gender</div>,
     cell: ({ row }) => {
-      const date = new Date(row.getValue("gender"));
-      const formatted = date.toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      });
-
-      return <div className="text-center font-medium ">{formatted}</div>;
+      return (
+        <div className="text-center font-medium">{row.getValue("gender")}</div>
+      );
     },
   },
   {

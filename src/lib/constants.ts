@@ -13,6 +13,7 @@ export enum Paths {
 
   Samples = "/samples",
   Sample = "/samples/:id",
+  SamplesCreate = "/samples/create",
 
   Profile = "/profile",
   Settings = "/settings",
@@ -25,3 +26,5 @@ export enum Paths {
 //   Settings = "/settings",
 //   VerifyEmail = "/verify-email",
 //   ResetPassword = "/reset-password",
+
+export const GenderOptions = ["Male", "Female", "Other"];

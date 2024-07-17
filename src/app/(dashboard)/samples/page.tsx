@@ -102,30 +102,50 @@
 
 import Link from "next/link";
 
-import { Plus } from "lucide-react";
-import { Input } from "~/components/ui/input";
-import { Button } from "~/components/ui/button";
 import SampleUpload from "~/components/SampleUpload";
-
+import { getSamples } from "~/server/samples";
+import { DataTable } from "./data-table";
+import { columns } from "./columns";
+import { Plus } from "lucide-react";
+import { Button } from "~/components/ui/button";
+import { Paths } from "~/lib/constants";
 const SamplesPage = () => {
+  async function Samples() {
+    const samples = await getSamples();
+
+    // interface ProjectsProps {
+    //     projects: any;
+    //   }
+    return (
+      <div className=" h-full w-full  rounded-lg  p-4 ">
+        <DataTable columns={columns} data={samples} />
+      </div>
+    );
+  }
+
   return (
     <div className="h-full w-full   ">
-      <div>
-        <div className="flex items-center justify-between px-4">
-          <div className="items-center  ">
-            <div className="flex items-center">
-              <h2 className="text-2xl font-bold">Projects</h2>
-            </div>
-
-            <p className="mt-1 text-sm text-gray-500">All Projects</p>
+      <div className="flex items-center justify-between px-4 py-2">
+        <div className="items-center  ">
+          <div className="flex items-center">
+            <h2 className="text-2xl font-bold">Samples</h2>
           </div>
+
+          <p className="mt-1 text-sm text-gray-500">All Samples</p>
+        </div>
+        <div className="flex  items-center justify-end gap-4 border-4">
+          <Link
+            href={Paths.SamplesCreate}
+            className="flex h-10  items-center justify-center bg-primary 
+             px-4  text-white hover:bg-zinc-600 focus:outline-none focus:ring-2 focus:ring-zinc-300"
+          >
+            <Plus color="white" />
+          </Link>
           <SampleUpload />
-          {/* <Button className="btn-primary h-10 w-40 items-center justify-center">
-          <Plus />
-          <Link href="/samp/new">Create Project</Link>
-        </Button> */}
         </div>
       </div>
+
+      <Samples />
     </div>
   );
 };
