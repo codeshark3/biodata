@@ -26,9 +26,9 @@ export default async function HomePage() {
 
             {/* <p className="mt-1 text-sm text-gray-500">All Projects</p> */}
           </div>
-          {/* <Button className="btn-primary h-10 w-40 items-center justify-center">
-            <Link href="/projects/new">Create Project</Link>
-          </Button> */}
+          <Button className="btn-primary h-10 w-40 items-center justify-center">
+            <Link href={Paths.NewSubmission}>New Submission</Link>
+          </Button>
         </div>
 
         <LogoutButton />

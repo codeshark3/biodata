@@ -7,6 +7,7 @@ import { getProjects } from "~/server/projects_queries";
 import { validateRequest } from "~/auth";
 import { redirect } from "next/navigation";
 import LogoutButton from "~/components/auth/logout_button";
+import { Paths } from "~/lib/constants";
 
 async function Projects() {
   const projects = await getProjects();
@@ -40,7 +41,7 @@ export default async function ProjectsPage() {
           </div>
           <Button className="btn-primary h-10 w-40 items-center justify-center">
             <Plus />
-            <Link href="/projects/new">Create Project</Link>
+            <Link href={Paths.NewProject}>Create Project</Link>
           </Button>
         </div>
 

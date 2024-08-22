@@ -84,3 +84,59 @@ export const SampleSchema = z.object({
   source: z.string().min(1, { message: "Source is required" }),
   location: z.string().min(1, { message: "Location is required" }),
 });
+
+export const SpecimenSchema = z.object({
+  title: z.string().min(1, { message: "Title is required" }),
+  submitter_name: z.string().min(1, { message: "Submitter name is required" }),
+  date_of_submission: z.string().date(),
+  institution: z.string().min(1, { message: "Institution is required" }),
+  department: z.string().min(1, { message: "Department is required" }),
+  contact_no: z.string().max(13, { message: "Contact number is required" }),
+  email: z.string().email({ message: "Email is required" }),
+
+  irb_approval_no: z
+    .string()
+    .min(1, { message: "IRB approval number is required" }),
+  approval_date: z.string().date(),
+
+  consent_forms_attached: z.boolean(),
+  ethics_compliance: z.boolean(),
+  approved_by: z.string().min(1, { message: "Approved by is required" }),
+
+  urine: z.boolean(),
+  no_urine: z.coerce.number(),
+
+  no_stool: z.coerce.number(),
+
+  stool: z.boolean(),
+  whole_blood: z.boolean(),
+
+  no_whole_blood: z.coerce.number(),
+  serum: z.boolean(),
+  no_serum: z.coerce.number(),
+  plasma: z.boolean(),
+  no_plasma: z.coerce.number(),
+  skin_snip: z.boolean(),
+  no_skin_snip: z.coerce.number(),
+  dna: z.boolean(),
+  no_dna: z.coerce.number(),
+  rna: z.boolean(),
+  no_rna: z.coerce.number(),
+  others: z.string(),
+  no_others: z.coerce.number(),
+  collection_date: z.string().date(),
+  storage_condition: z.string(),
+  preservatives: z.string(),
+  handling_instructions: z.string(),
+
+  number_of_samples: z.coerce.number(),
+
+  urine_batch_id: z.string(),
+  stool_batch_id: z.string(),
+  whole_blood_batch_id: z.string(),
+  serum_batch_id: z.string(),
+  plasma_batch_id: z.string(),
+  skin_snip_batch_id: z.string(),
+  dna_batch_id: z.string(),
+  rna_batch_id: z.string(),
+});

@@ -2,6 +2,7 @@
 // https://orm.drizzle.team/docs/sql-schema-declaration
 
 import { sql } from "drizzle-orm";
+
 import {
   index,
   pgEnum,
@@ -77,7 +78,8 @@ export const projects = createTable(
     principal_investigator: varchar("principal_investigator", {
       length: 255,
     }),
-    date_of_registration: date("date_of_registration"),
+    date_of_registration: varchar("date_of_registration", { length: 255 }),
+
     institution: varchar("institution", { length: 255 }),
     department: varchar("department", { length: 255 }),
     contact_no: varchar("contact_no", { length: 13 }),

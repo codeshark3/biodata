@@ -23,7 +23,7 @@ import { useRouter } from "next/navigation";
 import { addProject } from "~/server/projects_queries";
 import { TitleContainer } from "../TitleContainer";
 import FormFieldComponent from "./FormFieldComponent";
-import FormCheckboxComponent from "./FormCheckboxComponent";
+
 import { toast } from "~/components/ui/use-toast";
 import { FormError } from "~/components/FormError";
 import { FormSuccess } from "~/components/FormSuccess";
@@ -281,7 +281,7 @@ const NewProjectForm = () => {
                 control={form.control}
                 name="start_date"
                 render={({ field }) => (
-                  <FormItem className="w-[90%]">
+                  <FormItem className="w-[50%]">
                     <FormLabel>Start Date</FormLabel>
                     <FormControl>
                       <Input {...field} type="date" disabled={isPending} />
@@ -294,7 +294,7 @@ const NewProjectForm = () => {
                 control={form.control}
                 name="end_date"
                 render={({ field }) => (
-                  <FormItem className="w-[90%]">
+                  <FormItem className="w-[50%]">
                     <FormLabel>End Date</FormLabel>
                     <FormControl>
                       <Input {...field} type="date" disabled={isPending} />
@@ -367,6 +367,20 @@ const NewProjectForm = () => {
                     name="others"
                     label="Others"
                     placeholder="Others"
+                    fieldType={FormFieldType.INPUT}
+                  />
+                  <CustomFormField
+                    control={form.control}
+                    name="storage_requirements"
+                    label="Storage Requirement"
+                    placeholder="Storage Requirement"
+                    fieldType={FormFieldType.TEXTAREA}
+                  />
+                  <CustomFormField
+                    control={form.control}
+                    name="number_of_samples"
+                    label="Number of Samples"
+                    placeholder="Number of Samples"
                     fieldType={FormFieldType.INPUT}
                   />
                 </div>

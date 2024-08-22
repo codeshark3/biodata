@@ -9,11 +9,14 @@ export enum Paths {
   Dashboard = "/",
 
   Projects = "/projects",
+  NewProject = "/projects/new",
   Project = "/projects/:id",
 
   Samples = "/samples",
   Sample = "/samples/:id",
   SamplesCreate = "/samples/create",
+
+  NewSubmission = "/samples/submissions",
 
   Profile = "/profile",
   Settings = "/settings",
