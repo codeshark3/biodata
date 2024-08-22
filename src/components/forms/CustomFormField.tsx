@@ -192,8 +192,8 @@ import { Control } from "react-hook-form";
 // import { FormFieldType } from "./forms/PatientForm";
 // import "react-phone-number-input/style.css";
 
-// import ReactDatePicker from "react-datepicker";
-// import "react-datepicker/dist/react-datepicker.css";
+import ReactDatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 import Image from "next/image";
 
@@ -234,7 +234,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
   switch (props.fieldType) {
     case FormFieldType.INPUT:
       return (
-        <div className="border-dark-500 bg-dark-400 flex rounded-md border">
+        <div className="border-dark-500 bg-dark-400 mx-2 flex rounded-md border ">
           {iconSrc && (
             <Image
               src={iconSrc}
@@ -248,7 +248,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
             <Input
               placeholder={placeholder}
               {...field}
-              className="shad-input border-0"
+              className="shad-input  border-0"
             />
           </FormControl>
         </div>
@@ -284,7 +284,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
     //   break;
     case FormFieldType.DATE_PICKER:
       return (
-        <div className="border-dark-500 bg-dark-400 flex rounded-md border">
+        <div className="border-dark-500 bg-dark-400 mx-2 flex rounded-md border">
           <Image
             src="/assets/icons/calendar.svg"
             height={24}
@@ -293,14 +293,15 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
             className="ml-2"
           />
           <FormControl>
-            {/* <ReactDatePicker
+            <ReactDatePicker
               showTimeSelect={props.showTimeSelect ?? false}
               selected={field.value}
               onChange={(date) => field.onChange(date)}
               timeInputLabel="Time:"
               dateFormat={props.dateFormat ?? "MM/dd/yyyy"}
-              wrapperClassName="date-picker"
-            /> */}
+              wrapperClassName="date-picker h-10  border-0 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              className=""
+            />
           </FormControl>
         </div>
       );

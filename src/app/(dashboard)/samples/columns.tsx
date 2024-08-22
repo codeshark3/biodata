@@ -110,7 +110,7 @@ export const columns: ColumnDef<Samples>[] = [
             <Edit size={16} color="white" />
             <Link
               href={`/samples/${sample.id} `}
-              onClick={() => console.log(sample.id)}
+             
             >
               Details
             </Link>

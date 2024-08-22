@@ -18,7 +18,7 @@ import { Button } from "~/components/ui/button";
 // import { FormError } from "~/components/FormError";
 // import { FormSuccess } from "~/components/FormSuccess";
 import { ProjectSchema } from "~/schemas";
-import { FormCardWrapper } from "~/components/pages/FormCardWrapper";
+import { FormCardWrapper } from "~/components/forms/FormCardWrapper";
 import { useRouter } from "next/navigation";
 import { addProject } from "~/server/projects_queries";
 import { TitleContainer } from "../TitleContainer";
@@ -29,7 +29,7 @@ import { FormError } from "~/components/FormError";
 import { FormSuccess } from "~/components/FormSuccess";
 import { SampleDialog } from "../SampleDialog";
 import FormDialogComponent from "./FormDialogComponent";
-import CustomFormField from "./CustomFormField";
+import CustomFormField from "~/components/forms/CustomFormField";
 import { FormFieldType } from "./CustomFormField";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Label } from "../ui/label";
@@ -168,60 +168,54 @@ const NewProjectForm = () => {
                 label="Title"
                 placeholder="Project Title"
                 type="text"
-                isPending={false} // Pass the actual isPending state
+                isPending={false}   
               /> */}
               <div className=" flex  items-center justify-center  ">
-                <FormFieldComponent
+                <CustomFormField
                   control={form.control}
                   name="principal_investigator"
                   label="Principal Investigator"
                   placeholder="Principal Investigator"
-                  type="text"
-                  isPending={false} // Pass the actual isPending state
+                  fieldType={FormFieldType.INPUT}
                 />
-                <FormFieldComponent
+                <CustomFormField
                   control={form.control}
                   name="date_of_registration"
                   label="Date of Registration"
                   placeholder="Date of Registration"
-                  type="date"
-                  isPending={false} // Pass the actual isPending state
+                  fieldType={FormFieldType.DATE_PICKER}
                 />
               </div>
               <div className=" flex  items-center justify-center ">
-                <FormFieldComponent
+                <CustomFormField
                   control={form.control}
                   name="institution"
                   label="Institution"
                   placeholder="Institution"
-                  type="text"
-                  isPending={false} // Pass the actual isPending state
+                  fieldType={FormFieldType.INPUT}
                 />
-                <FormFieldComponent
+                <CustomFormField
                   control={form.control}
-                  name="department" // Pass the actual name of the fieldpartment
+                  name="department"
                   label="Department"
                   placeholder="Department"
-                  type="text"
-                  isPending={false} // Pass the actual isPending state
+                  fieldType={FormFieldType.INPUT}
                 />
               </div>
               <div className=" flex  items-center justify-center ">
-                <FormFieldComponent
+                <CustomFormField
                   control={form.control}
-                  name="contact_no" // Pass the actual name of the fieldcontact_no
+                  name="contact_no"
                   label="Contact Number"
                   placeholder="Contact Number"
-                  type="text"
-                  isPending={false} // Pass the actual isPending state
+                  fieldType={FormFieldType.INPUT}
                 />
-                <FormFieldComponent
+                <CustomFormField
                   control={form.control}
-                  name="email" // Pasxxs the actual name of the fieldemail
+                  name="email"
                   label="Email"
                   placeholder="Email"
-                  type="text"
-                  isPending={false} // Pass the actual isPending state
+                  fieldType={FormFieldType.INPUT}
                 />
               </div>
             </div>
@@ -229,56 +223,52 @@ const NewProjectForm = () => {
           <FormCardWrapper headerLabel="Section B: Ethical Approval">
             <div className="space-y-4">
               <div className=" flex  items-center justify-center  ">
-                <FormFieldComponent
+                <CustomFormField
                   control={form.control}
                   name="name_irb"
                   label="Name of IRB"
                   placeholder="Name of IRB"
-                  type="text"
-                  isPending={false} // Pass the actual isPending state
+                  fieldType={FormFieldType.INPUT}
                 />
-                <FormFieldComponent
+                <CustomFormField
                   control={form.control}
                   name="irb_approval_no"
                   label="IRB Aproval Number"
                   placeholder="IRB Aproval Number"
-                  type="text"
-                  isPending={false} // Pass the actual isPending state
+                  fieldType={FormFieldType.INPUT}
                 />
               </div>
               <div className=" flex  items-center justify-center ">
-                <FormFieldComponent
+                <CustomFormField
                   control={form.control}
                   name="approval_date"
                   label="Approval Date"
                   placeholder="Approval Date"
-                  type="date"
-                  isPending={false} // Pass the actual isPending state
+                  fieldType={FormFieldType.DATE_PICKER}
                 />
-                <FormFieldComponent
+                <CustomFormField
                   control={form.control}
-                  name="expiry_date" // Pass the actual name of the fieldpartment
+                  name="expiry_date"
                   label="Expiry Date"
                   placeholder="Expiry Date"
-                  type="date"
-                  isPending={false} // Pass the actual isPending state
+                  fieldType={FormFieldType.DATE_PICKER}
                 />
               </div>
 
               <div className=" flex  items-center justify-between  ">
                 <div className=" flex w-1/2   px-2 py-1">
-                  <FormCheckboxComponent
+                  <CustomFormField
                     control={form.control}
                     name="consent_forms"
-                    isPending={false} // Pass the actual isPending state
                     label="Consent Forms Attached?"
+                    fieldType={FormFieldType.CHECKBOX}
                   />
                 </div>
                 <div className=" flex w-1/2 px-2 py-1">
-                  <FormCheckboxComponent
+                  <CustomFormField
                     control={form.control}
                     name="consent_for_storage"
-                    isPending={false} // Pass the actual isPending state
+                    fieldType={FormFieldType.CHECKBOX}
                     label="Consent Covers Storage For Future Use?"
                   />
                 </div>
@@ -317,8 +307,8 @@ const NewProjectForm = () => {
 
             <div className="my-4 flex w-full flex-col items-center justify-center border-4 border-primary">
               <p className="pb-2  font-semibold">Specimens Types Required</p>
-              <div className="flex w-full  justify-center border-t-4 border-primary px-2 ">
-                <div className="flex  w-1/2  flex-col space-y-4  ">
+              <div className="flex w-full  justify-center border-t-4 border-primary px-2 py-2 ">
+                <div className="flex  w-1/3  flex-col space-y-4  ">
                   <CustomFormField
                     fieldType={FormFieldType.CHECKBOX}
                     control={form.control}
@@ -344,7 +334,7 @@ const NewProjectForm = () => {
                     label="DNA"
                   />
                 </div>
-                <div className="flex  w-1/2 flex-col space-y-4 ">
+                <div className="flex  w-1/3 flex-col space-y-4 ">
                   <CustomFormField
                     fieldType={FormFieldType.CHECKBOX}
                     control={form.control}
@@ -371,44 +361,46 @@ const NewProjectForm = () => {
                     label="RNA"
                   />
                 </div>
+                <div className="flex  w-1/3 flex-col space-y-4 ">
+                  <CustomFormField
+                    control={form.control}
+                    name="others"
+                    label="Others"
+                    placeholder="Others"
+                    fieldType={FormFieldType.INPUT}
+                  />
+                </div>
               </div>
-              <FormFieldComponent
-                control={form.control}
-                name="others"
-                label=""
-                placeholder="Others"
-                type="text"
-                isPending={false}
-              />
             </div>
 
-            <div className="flex  items-start   border-2   px-2 pt-2">
-              <FormField
-                control={form.control}
-                name="storage_requirements"
-                render={({ field }) => (
-                  <FormItem className="w-[90%] pr-2">
-                    <FormLabel>Storage Requirement</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        type="text"
-                        placeholder="Storage Requirement"
-                        disabled={isPending}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormFieldComponent
-                control={form.control}
-                name="number_of_samples"
-                label="Number of Samples"
-                placeholder="Number of Samples"
-                type="number"
-                isPending={false}
-              />
+            <div className="flex  items-start     px-2 pt-2">
+              <div className="flex w-1/2 px-2">
+                <CustomFormField
+                  control={form.control}
+                  name="storage_requirements"
+                  label="Storage Requirement"
+                  placeholder="Storage Requirement"
+                  fieldType={FormFieldType.TEXTAREA}
+                />
+              </div>
+
+              <div className="flex w-1/2 flex-col">
+                {" "}
+                {/* <CustomFormField
+                  control={form.control}
+                  name="others"
+                  label="Others"
+                  placeholder="Others"
+                  fieldType={FormFieldType.INPUT}
+                /> */}
+                <CustomFormField
+                  control={form.control}
+                  name="number_of_samples"
+                  label="Number of Samples"
+                  placeholder="Number of Samples"
+                  fieldType={FormFieldType.INPUT}
+                />
+              </div>
             </div>
           </FormCardWrapper>
           {/* <FormError message={error} />

@@ -12,9 +12,9 @@ import {
   FormMessage,
   FormControl,
 } from "~/components/ui/form";
-import DetailLabel from "~/components/pages/DetailLabel";
-import { FormCardWrapper } from "~/components/pages/FormCardWrapper";
-import DetailText from "~/components/pages/DetailText";
+import DetailLabel from "~/components/forms/DetailLabel";
+import { FormCardWrapper } from "~/components/forms/FormCardWrapper";
+import DetailText from "~/components/forms/DetailText";
 
 interface Props {
   params: {

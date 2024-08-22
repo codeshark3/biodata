@@ -33,8 +33,8 @@ const Navbar = () => {
   ];
   return (
     <div className="grid grid-cols-2   gap-4  border-b p-4 ">
-      <CommandDemo />
-      <div className="flex items-center justify-end">
+      {/* <CommandDemo /> */}
+      {/* <div className="flex items-center justify-end">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" size="icon">
@@ -57,8 +57,7 @@ const Navbar = () => {
               </DropdownMenuItem>
             ))}
           </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
+        </DropdownMenu>  </div>*/}
     </div>
     // <nav className="flex-end  flex w-full  items-center justify-between border-b p-4 text-xl font-semibold">
     //   {/* <Link href="/">Logos</Link> */}

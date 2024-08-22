@@ -1,4 +1,4 @@
-import NewProjectForm from "~/components/pages/NewProjectForm";
+import NewProjectForm from "~/components/forms/NewProjectForm";
 
 const NewProjectPage = () => {
   return <NewProjectForm />;

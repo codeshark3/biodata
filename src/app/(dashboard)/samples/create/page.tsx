@@ -1,5 +1,5 @@
 "use client";
-import CustomFormField from "~/components/pages/CustomFormField";
+import CustomFormField from "~/components/forms/CustomFormField";
 import { TitleContainer } from "~/components/TitleContainer";
 
 import { useState, useTransition } from "react";
@@ -21,7 +21,7 @@ import {
 } from "~/components/ui/form";
 import { Button } from "~/components/ui/button";
 
-import { FormFieldType } from "~/components/pages/CustomFormField";
+import { FormFieldType } from "~/components/forms/CustomFormField";
 import { addSample } from "~/server/samples";
 
 const NewSamplePage = () => {
